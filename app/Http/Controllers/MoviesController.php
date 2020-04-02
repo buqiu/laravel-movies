@@ -27,18 +27,18 @@ class MoviesController extends Controller
     {
         // 热门电影
         $populars = Http::withToken(config('services.tmdb.token'))
-            ->get("https://api.themoviedb.org/3/movie/popular?api_key$this->api_key&language=$this->language")
+            ->get("https://api.themoviedb.org/3/movie/popular?api_key=$this->api_key&language=$this->language")
             ->json()['results'];
 
         // 正在播放
         $now_playing = Http::withToken(config('services.tmdb.token'))
-            ->get("https://api.themoviedb.org/3/movie/now_playing?api_key$this->api_key&language=$this->language")
+            ->get("https://api.themoviedb.org/3/movie/now_playing?api_key=$this->api_key&language=$this->language")
             ->json()['results'];
 
         // 电影类型
         $genres = collect(
             Http::withToken(config('services.tmdb.token'))
-                ->get("https://api.themoviedb.org/3/genre/movie/list?api_key$this->api_key&language=$this->language")
+                ->get("https://api.themoviedb.org/3/genre/movie/list?api_key=$this->api_key&language=$this->language")
                 ->json()['genres']
         )->mapWithKeys(
             function ($genre) {
